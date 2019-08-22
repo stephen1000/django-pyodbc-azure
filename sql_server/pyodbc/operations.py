@@ -2,12 +2,11 @@ import datetime
 import uuid
 import warnings
 
+import pytz
 from django.conf import settings
 from django.db.backends.base.operations import BaseDatabaseOperations
 from django.utils import timezone
 from django.utils.encoding import force_text
-
-import pytz
 
 
 class DatabaseOperations(BaseDatabaseOperations):
@@ -225,8 +224,8 @@ class DatabaseOperations(BaseDatabaseOperations):
         return cursor.fetchone()[0]
 
     def lookup_cast(self, lookup_type, internal_type=None):
-        if lookup_type in ('iexact', 'icontains', 'istartswith', 'iendswith'):
-            return "UPPER(%s)"
+        # if lookup_type in ('iexact', 'icontains', 'istartswith', 'iendswith'):
+            # return "UPPER(%s)"
         return "%s"
 
     def max_name_length(self):
