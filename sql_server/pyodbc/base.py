@@ -107,17 +107,17 @@ class DatabaseWrapper(BaseDatabaseWrapper):
         # Since '=' is used not only for string comparision there is no way
         # to make it case (in)sensitive.
         'exact': '= %s',
-        'iexact': "= UPPER(%s)",
+        'iexact': "like %s",
         'contains': "LIKE %s ESCAPE '\\'",
-        'icontains': "LIKE UPPER(%s) ESCAPE '\\'",
+        'icontains': "LIKE %s ESCAPE '\\'",
         'gt': '> %s',
         'gte': '>= %s',
         'lt': '< %s',
         'lte': '<= %s',
         'startswith': "LIKE %s ESCAPE '\\'",
         'endswith': "LIKE %s ESCAPE '\\'",
-        'istartswith': "LIKE UPPER(%s) ESCAPE '\\'",
-        'iendswith': "LIKE UPPER(%s) ESCAPE '\\'",
+        'istartswith': "LIKE %s ESCAPE '\\'",
+        'iendswith': "LIKE %s ESCAPE '\\'",
     }
 
     # The patterns below are used to generate SQL pattern lookup clauses when
@@ -131,11 +131,11 @@ class DatabaseWrapper(BaseDatabaseWrapper):
     pattern_esc = r"REPLACE(REPLACE(REPLACE({}, '\', '[\]'), '%%', '[%%]'), '_', '[_]')"
     pattern_ops = {
         'contains': "LIKE '%%' + {} + '%%'",
-        'icontains': "LIKE '%%' + UPPER({}) + '%%'",
+        'icontains': "LIKE '%%' + ({}) + '%%'",
         'startswith': "LIKE {} + '%%'",
-        'istartswith': "LIKE UPPER({}) + '%%'",
+        'istartswith': "LIKE ({}) + '%%'",
         'endswith': "LIKE '%%' + {}",
-        'iendswith': "LIKE '%%' + UPPER({})",
+        'iendswith': "LIKE '%%' + ({})",
     }
 
     Database = Database
