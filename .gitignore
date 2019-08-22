@@ -8,3 +8,6 @@ Thumbs.db
 *.egg-info
 
 tests/local_settings.py
+
+env
+.vscode
